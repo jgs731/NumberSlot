@@ -8,6 +8,8 @@ namespace NumberSlot
         {
             Random random = new Random();
             int[,] gameGrid = new int[3, 3];
+            int playerWager;
+            int winnings = 0;
             
             for(int i = 0; i < gameGrid.GetLength(0); i++)
             {
@@ -17,6 +19,18 @@ namespace NumberSlot
                     Console.Write(gameGrid[i,j] + "\t");
                 }
                 Console.WriteLine("\n");
+            }
+
+            Console.WriteLine("Enter your wager (in whole £): ");
+            playerWager = Convert.ToInt32(Console.ReadLine());
+            if (gameGrid[1, 0] == gameGrid[1, 1] && gameGrid[1, 1] == gameGrid[1, 2])
+            {
+                winnings += (playerWager * 3);
+                Console.WriteLine($"Total winnings: £{winnings}");
+            }
+            else
+            {
+                Console.WriteLine($"Unlucky - play again!");
             }
         }
     }
