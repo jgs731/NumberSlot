@@ -9,8 +9,6 @@ namespace NumberSlot
             Random random = new Random();
             int[,] gameGrid = new int[3, 3];
             int playerWager;
-            int[] winningRow = { 2, 2, 2 };
-            int counter = 0;
             int winnings = 0;
 
             for (int i = 0; i < gameGrid.GetLength(0); i++)
@@ -23,70 +21,52 @@ namespace NumberSlot
                 Console.WriteLine("\n");
             }
 
-            Console.WriteLine("Enter your wager (in whole £): ");
+            Console.Write("Enter the number of lines you want to play (Max 8): ");
             playerWager = Convert.ToInt32(Console.ReadLine());
-            int[] topHLine = { gameGrid[0, 0], gameGrid[0, 1], gameGrid[0, 2] };
-            int[] middleHLine = { gameGrid[1, 0], gameGrid[1, 1], gameGrid[1, 2] };
-            int[] bottomHLine = { gameGrid[2, 0], gameGrid[2, 1], gameGrid[2, 2] };
-
-            int[] topVLine = { gameGrid[0, 0], gameGrid[0, 1], gameGrid[0, 2] };
-            int[] middleVLine = { gameGrid[1, 0], gameGrid[1, 1], gameGrid[1, 2] };
-            int[] bottomVLine = { gameGrid[2, 0], gameGrid[2, 1], gameGrid[2, 2] };
-
-            int[] dLine = { gameGrid[0, 0], gameGrid[1, 1], gameGrid[2, 2] };
-            int[] dLine2 = { gameGrid[0, 2], gameGrid[1, 1], gameGrid[2, 0] };
-
-            if (topHLine == winningRow)
+            if (playerWager == 7 || playerWager == 8)
             {
-                winnings += playerWager;
-                counter++;
+                //diagonal
+                for (int i = 0; i < gameGrid.GetLength(0); i++)
+                {
+                    for (int j = 0; j < (gameGrid.GetLength(1) - i); j--)
+                    {
+                        int jEdit = Math.Abs(i);
+                        if (gameGrid[0, jEdit] == gameGrid[1, jEdit] && gameGrid[1, jEdit] == gameGrid[2, jEdit])
+                        {
+                            winnings += 3;
+                        }
+                    }
+                }
             }
-
-            if (middleHLine == winningRow)
+            else if (playerWager >= 3 && playerWager < 6)
             {
-                winnings += playerWager;
-                counter++;
+                // vertical
+                for (int i = 0; i < gameGrid.GetLength(1); i++)
+                {
+                    if (gameGrid[0, i] == gameGrid[1, i] && gameGrid[i, 1] == gameGrid[2, i])
+                    {
+                        winnings += 2;
+                    }
+                }
             }
-
-            if (bottomHLine == winningRow)
+            // horizontal
+            else if (playerWager > 1 && playerWager < 3)
             {
-                winnings += playerWager;
-                counter++;
+                for (int i = 0; i < gameGrid.GetLength(0); i++)
+                {
+                    if (gameGrid[i, 0] == gameGrid[i, 1] && gameGrid[i, 1] == gameGrid[i, 2])
+                    {
+                        winnings++;
+                    }
+                }
             }
-
-            if (topVLine == winningRow)
+            else
             {
-                winnings += (playerWager * 2);
-                counter++;
+                if (gameGrid[1, 0] == gameGrid[1, 1] && gameGrid[1, 1] == gameGrid[1, 2])
+                {
+                    winnings++;
+                }
             }
-
-            if (middleVLine == winningRow)
-            {
-                winnings += (playerWager * 2);
-                counter++;
-            }
-
-            if (bottomVLine == winningRow)
-            {
-                winnings += (playerWager * 2);
-                counter++;
-            }
-
-            if (dLine == winningRow)
-            {
-                winnings += (playerWager * 3);
-                counter++;
-            }
-
-            if (dLine2 == winningRow)
-            {
-                winnings += (playerWager * 3);
-                counter++;
-            }
-            //else
-            //{
-            //    Console.WriteLine($"Unlucky - play again!");
-            //}
             Console.WriteLine($"Total winnings: £{winnings}");
         }
     }
