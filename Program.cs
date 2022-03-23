@@ -10,6 +10,10 @@ namespace NumberSlot
             int[,] gameGrid = new int[3, 3];
             int playerWager;
             int winnings = 0;
+            int[] winningCombo1 = new int[3] { 1, 1, 1 };
+            int[] winningCombo2 = new int[3] { 2, 2, 2 };
+            int[] winningCombo3 = new int[3] { 3, 3, 3 };
+            int[][] winningGrid = new int[3][] { winningCombo1, winningCombo2, winningCombo3};
 
             for (int i = 0; i < gameGrid.GetLength(0); i++)
             {
@@ -23,46 +27,34 @@ namespace NumberSlot
 
             Console.Write("Enter the number of lines you want to play (Max 8): ");
             playerWager = Convert.ToInt32(Console.ReadLine());
-            if (playerWager == 7 || playerWager == 8)
+            for (int i = 0; i < gameGrid.GetLength(1); i++)
             {
                 //diagonal
-                for (int i = 0; i < gameGrid.GetLength(0); i++)
+                if (gameGrid[0, 0] == winningGrid[0][0]
+                    && gameGrid[1, 1] == winningGrid[1][1]
+                    && gameGrid[2, 2] == winningGrid[2][2])
                 {
-                    for (int j = 0; j < (gameGrid.GetLength(1) - i); j--)
-                    {
-                        int jEdit = Math.Abs(i);
-                        if (gameGrid[0, jEdit] == gameGrid[1, jEdit] && gameGrid[1, jEdit] == gameGrid[2, jEdit])
-                        {
-                            winnings += 3;
-                        }
-                    }
+                    winnings += 3;
                 }
-            }
-            else if (playerWager >= 3 && playerWager < 6)
-            {
+
+                if (gameGrid[0, 2] == winningGrid[0][2]
+                    && gameGrid[1, 1] == winningGrid[1][1]
+                    && gameGrid[2, 0] == winningGrid[2][0])
+                {
+                    winnings += 3;
+                }
+
                 // vertical
-                for (int i = 0; i < gameGrid.GetLength(1); i++)
+                if (gameGrid[0, i] == winningGrid[0][0]
+                    && gameGrid[1, i] == winningGrid[0][1]
+                    && gameGrid[2, i] == winningGrid[0][2])
                 {
-                    if (gameGrid[0, i] == gameGrid[1, i] && gameGrid[i, 1] == gameGrid[2, i])
-                    {
-                        winnings += 2;
-                    }
+                    winnings += 2;
                 }
-            }
-            // horizontal
-            else if (playerWager > 1 && playerWager < 3)
-            {
-                for (int i = 0; i < gameGrid.GetLength(0); i++)
-                {
-                    if (gameGrid[i, 0] == gameGrid[i, 1] && gameGrid[i, 1] == gameGrid[i, 2])
-                    {
-                        winnings++;
-                    }
-                }
-            }
-            else
-            {
-                if (gameGrid[1, 0] == gameGrid[1, 1] && gameGrid[1, 1] == gameGrid[1, 2])
+                // horizontal
+                if (gameGrid[i, 0] == winningGrid[0][0]
+                    && gameGrid[i, 1] == winningGrid[0][1]
+                    && gameGrid[i, 2] == winningGrid[0][2])
                 {
                     winnings++;
                 }
