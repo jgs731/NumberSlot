@@ -24,11 +24,33 @@ namespace NumberSlot
 
             Console.Write("Enter the number of lines you want to play: ");
             playerWager = Convert.ToInt32(Console.ReadLine());
-            if (gameGrid[1, 0] == winningCombo[0] && gameGrid[1, 1] == winningCombo[1] && gameGrid[1, 2] == winningCombo[2])
+            if (playerWager > 1)
             {
-                Console.WriteLine($"Your {playerWager} shot was successful!");
-                winnings++;
+                for (int i = 0; i < gameGrid.GetLength(0); i++)
+                {
+                    for (int j = 0; j < gameGrid.GetLength(1); j++)
+                    {
+                        if (gameGrid[i, 0] == winningCombo[0] && gameGrid[i, 1] == winningCombo[1] && gameGrid[i, 2] == winningCombo[2])
+                        {
+                            if (i == 1)
+                            {
+                                continue;
+                            }
+                            winnings += 2;
+                        }
+                    }
+                }
             }
+            else
+            {
+                if (gameGrid[1, 0] == winningCombo[0] && gameGrid[1, 1] == winningCombo[1] && gameGrid[1, 2] == winningCombo[2])
+                {
+                    Console.WriteLine($"Your {playerWager} shot was successful!");
+                    winnings++;
+                }
+            }
+
+
             Console.WriteLine($"Total winnings: £{winnings}");
         }
     }
