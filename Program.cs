@@ -10,10 +10,7 @@ namespace NumberSlot
             int[,] gameGrid = new int[3, 3];
             int playerWager;
             int winnings = 0;
-            int[] winningCombo1 = new int[3] { 1, 1, 1 };
-            int[] winningCombo2 = new int[3] { 2, 2, 2 };
-            int[] winningCombo3 = new int[3] { 3, 3, 3 };
-            int[][] winningGrid = new int[3][] { winningCombo1, winningCombo2, winningCombo3};
+            int[] winningCombo = new int[3] { 2, 2, 2 };
 
             for (int i = 0; i < gameGrid.GetLength(0); i++)
             {
@@ -25,39 +22,12 @@ namespace NumberSlot
                 Console.WriteLine("\n");
             }
 
-            Console.Write("Enter the number of lines you want to play (Max 8): ");
+            Console.Write("Enter the number of lines you want to play: ");
             playerWager = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < gameGrid.GetLength(1); i++)
+            if (gameGrid[1, 0] == winningCombo[0] && gameGrid[1, 1] == winningCombo[1] && gameGrid[1, 2] == winningCombo[2])
             {
-                //diagonal
-                if (gameGrid[0, 0] == winningGrid[0][0]
-                    && gameGrid[1, 1] == winningGrid[1][1]
-                    && gameGrid[2, 2] == winningGrid[2][2])
-                {
-                    winnings += 3;
-                }
-
-                if (gameGrid[0, 2] == winningGrid[0][2]
-                    && gameGrid[1, 1] == winningGrid[1][1]
-                    && gameGrid[2, 0] == winningGrid[2][0])
-                {
-                    winnings += 3;
-                }
-
-                // vertical
-                if (gameGrid[0, i] == winningGrid[0][0]
-                    && gameGrid[1, i] == winningGrid[0][1]
-                    && gameGrid[2, i] == winningGrid[0][2])
-                {
-                    winnings += 2;
-                }
-                // horizontal
-                if (gameGrid[i, 0] == winningGrid[0][0]
-                    && gameGrid[i, 1] == winningGrid[0][1]
-                    && gameGrid[i, 2] == winningGrid[0][2])
-                {
-                    winnings++;
-                }
+                Console.WriteLine($"Your {playerWager} shot was successful!");
+                winnings++;
             }
             Console.WriteLine($"Total winnings: £{winnings}");
         }
