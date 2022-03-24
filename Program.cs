@@ -17,9 +17,7 @@ namespace NumberSlot
                 for (int j = 0; j < gameGrid.GetLength(1); j++)
                 {
                     gameGrid[i, j] = random.Next(0, 3);
-                    Console.Write(gameGrid[i, j] + "\t");
                 }
-                Console.WriteLine("\n");
             }
 
             Console.Write("Enter the number of lines you want to play: ");
@@ -28,18 +26,22 @@ namespace NumberSlot
             {
                 for (int i = 0; i < gameGrid.GetLength(0); i++)
                 {
-                    for (int j = 0; j < gameGrid.GetLength(1); j++)
+                    if (i == 1)
                     {
-                        if (gameGrid[i, 0] == winningCombo[0] && gameGrid[i, 1] == winningCombo[1] && gameGrid[i, 2] == winningCombo[2])
-                        {
-                            if (i == 1)
-                            {
-                                continue;
-                            }
-                            winnings += 2;
-                        }
+                        continue;
+                    }
+                    if (gameGrid[i, 0] == winningCombo[0] && gameGrid[i, 1] == winningCombo[1] && gameGrid[i, 2] == winningCombo[2])
+                    {
+                        winnings++;
                     }
                 }
+                //for (int j = 0; j < gameGrid.GetLength(1); j++)
+                //{
+                //    if (gameGrid[0, j] == winningCombo[0] && gameGrid[1, j] == winningCombo[1] && gameGrid[2, j] == winningCombo[2])
+                //   {
+                //        winnings += 2;
+                //    }
+                // }
             }
             else
             {
