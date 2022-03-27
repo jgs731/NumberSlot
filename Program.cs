@@ -4,11 +4,12 @@ namespace NumberSlot
 {
     internal class Program
     {
+
         static void Main(string[] args)
         {
             Random random = new Random();
             int[,] gameGrid = new int[3, 3];
-            int playerWager;
+            int numberOfRows;
             int winnings = 0;
             int[] winningCombo = new int[3] { 2, 2, 2 };
 
@@ -21,38 +22,44 @@ namespace NumberSlot
             }
 
             Console.Write("Enter the number of lines you want to play: ");
-            playerWager = Convert.ToInt32(Console.ReadLine());
-            if (playerWager > 1)
+            numberOfRows = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < gameGrid.GetLength(0); i++) //iterates through every line
             {
-                for (int i = 0; i < gameGrid.GetLength(0); i++)
+                //skip certain lines depeding on numberOFRows
+                // maybe some if statements, mybe a switch case ;)
+                switch (numberOfRows)
                 {
-                    if (i == 1)
+                    case 1:
                     {
-                        continue;
+                        if (i != 1)
+                        {
+                            continue;
+                        }
+                        break;
                     }
-                    if (gameGrid[i, 0] == winningCombo[0] && gameGrid[i, 1] == winningCombo[1] && gameGrid[i, 2] == winningCombo[2])
+                    case 2:
                     {
-                        winnings++;
+                        if (i == 1)
+                        {
+                            continue;
+                        }
+                        break;
+                    }
+                    default:
+                    {
+                        break;
                     }
                 }
-                //for (int j = 0; j < gameGrid.GetLength(1); j++)
-                //{
-                //    if (gameGrid[0, j] == winningCombo[0] && gameGrid[1, j] == winningCombo[1] && gameGrid[2, j] == winningCombo[2])
-                //   {
-                //        winnings += 2;
-                //    }
-                // }
-            }
-            else
-            {
-                if (gameGrid[1, 0] == winningCombo[0] && gameGrid[1, 1] == winningCombo[1] && gameGrid[1, 2] == winningCombo[2])
+                if (gameGrid[i, 0] == winningCombo[0] && gameGrid[i, 1] == winningCombo[1] && gameGrid[i, 2] == winningCombo[2])
                 {
-                    Console.WriteLine($"Your {playerWager} shot was successful!");
                     winnings++;
                 }
             }
 
-
+            if (winnings > 1)
+            {
+                Console.WriteLine($"You have some winning rows!");
+            }
             Console.WriteLine($"Total winnings: £{winnings}");
         }
     }
