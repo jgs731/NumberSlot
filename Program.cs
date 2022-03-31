@@ -16,54 +16,36 @@ namespace NumberSlot
                 slotGrid = Grid.GenerateGrid();
                 Grid.DisplayGrid(slotGrid);
                
-                Console.Write("Enter the number of lines you want to play (max 8): ");
+
                 try
                 {
                     numberOfRows = Convert.ToInt32(Console.ReadLine());
-                    
+
                     switch (numberOfRows)
                     {
                         case 1:
                         case 2:
                         case 3:
-                            {
                                 winnings += Grid.CalculateHorizontalLines(slotGrid, numberOfRows);
                                 break;
-                            }
                         case 4:
                         case 5:
                         case 6:
-                            {
                                 winnings += Grid.CalculateHorizontalLines(slotGrid, numberOfRows);
                                 winnings += Grid.CalculateVerticalLines(slotGrid, numberOfRows);
                                 break;
-                            }
                         case 7:
                         case 8:
-                            {
                                 winnings += Grid.CalculateHorizontalLines(slotGrid, numberOfRows);
                                 winnings += Grid.CalculateVerticalLines(slotGrid, numberOfRows);
                                 winnings += Grid.CalculateDiagonalLines(slotGrid, numberOfRows);
                                 break;
-                            }
                     }
-
-                    if (winnings > 0) // minimum win is £1 for a horizonal line
-                    {
-                        Console.WriteLine($"You have some winning rows!");
-                    }
-                    Console.WriteLine($"Total winnings: £{winnings}");
+                    UIMethods.PrintWinnings(winnings);
                     winnings = 0; // reset winnings after each spin
-
-                    Console.Write("Spin again? (Y/N) ");
-                    string response = Console.ReadLine();
-                    if (response.ToUpper() == "N")
+                    if (UIMethods.SpinAgainPrompt() == false)
                     {
-                        continueSpinning = false;
-                    }
-                    else
-                    {
-                        Console.Clear();
+                        Environment.Exit(0);
                     }
                 }
                 catch (Exception ex)
