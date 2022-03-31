@@ -22,11 +22,24 @@ namespace NumberSlot
 
         public static int CalculateHorizontalLines(int[,] slotGrid, int lines)
         {
-            for (int i = 0; i < lines; i++)
+            if (lines < 3)
             {
-                if (slotGrid[i, 0] == winningCombo[0] && slotGrid[i, 1] == winningCombo[1] && slotGrid[i, 2] == winningCombo[2])
+                for (int i = 0; i < (slotGrid.GetLength(0) - lines); i++)
                 {
-                    winningsCount++;
+                    if (slotGrid[i, 0] == winningCombo[0] && slotGrid[i, 1] == winningCombo[1] && slotGrid[i, 2] == winningCombo[2])
+                    {
+                        winningsCount++;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < slotGrid.GetLength(0); i++)
+                {
+                    if (slotGrid[i, 0] == winningCombo[0] && slotGrid[i, 1] == winningCombo[1] && slotGrid[i, 2] == winningCombo[2])
+                    {
+                        winningsCount++;
+                    }
                 }
             }
             return winningsCount;
