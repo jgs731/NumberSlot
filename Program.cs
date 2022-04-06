@@ -14,13 +14,11 @@ namespace NumberSlot
             while (continueSpinning)
             {
                 slotGrid = Grid.GenerateGrid();
-                Grid.DisplayGrid(slotGrid);
-               
+                UIMethods.DisplayGrid(slotGrid);
 
                 try
                 {
-                    UIMethods.PromptUserNumberEntry();
-                    numberOfRows = Convert.ToInt32(Console.ReadLine());
+                    numberOfRows = UIMethods.PromptUserNumberEntry();
 
                     switch (numberOfRows)
                     {
