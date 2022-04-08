@@ -30,7 +30,7 @@ namespace NumberSlot
         /// <returns>Integer, between 1-8</returns>
         public static int PromptUserNumberEntry()
         {
-            Console.Write("Enter the number of lines you want to play (max 8): ");
+            Console.Write("Enter £1 per line to play (8 lines max): ");
             int playerLines = Convert.ToInt32(Console.ReadLine());
             if (playerLines >= 1 && playerLines <= 8)
             {
@@ -48,11 +48,8 @@ namespace NumberSlot
         /// <param name="winAmount"></param>
         public static void PrintWinnings(int winAmount)
         {
-            if (winAmount > 0) // minimum win is £1 for a horizonal line
-            {
-                Console.WriteLine($"You have some winning rows!");
-            }
-            Console.WriteLine($"Total winnings: £{winAmount}");
+            // minimum win is £1 for a horizonal line
+            Console.WriteLine((winAmount > 0) ? $"You win! Total winnings: £{winAmount}" : "Unlucky, no winning lines");
         }
 
         /// <summary>

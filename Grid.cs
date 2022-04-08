@@ -6,8 +6,8 @@ namespace NumberSlot
     {
         static int[] winningCombo = new int[3] { 2, 2, 2 };
         static int winningsCount = 0;
-        public const int MAX_HORIZONTAL_ROWS = 3;
-        public const int MAX_VERTICAL_ROWS = 6;
+        public const int MAX_HORIZONTAL_LINES = 3;
+        public const int MAX_HORIZONTAL_AND_VERTICAL_LINES = 6;
 
         /// <summary>
         /// Returns a randomly generated 3x3 grid with each position containing a number between 0-2
@@ -41,7 +41,7 @@ namespace NumberSlot
         /// <returns>1 for every winning line, or 0</returns>
         public static int CalculateHorizontalLines(int[,] slotGrid, int lines)
         {
-            if (lines < MAX_HORIZONTAL_ROWS)
+            if (lines < MAX_HORIZONTAL_LINES)
             {
                 for (int i = 0; i < lines; i++)
                 {
@@ -75,7 +75,7 @@ namespace NumberSlot
         /// <returns>2 for each winning line, or 0</returns>
         public static int CalculateVerticalLines(int[,] slotGrid, int lines)
         {
-            if (lines < MAX_VERTICAL_ROWS)
+            if (lines < MAX_HORIZONTAL_AND_VERTICAL_LINES)
             {
                 for (int j = 0; j < (lines - slotGrid.GetLength(1)); j++)
                 {

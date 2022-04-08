@@ -15,11 +15,9 @@ namespace NumberSlot
             {
                 slotGrid = Grid.GenerateGrid();
                 UIMethods.DisplayGrid(slotGrid);
-
                 try
                 {
                     numberOfRows = UIMethods.PromptUserNumberEntry();
-
                     switch (numberOfRows)
                     {
                         case 1:
@@ -49,7 +47,7 @@ namespace NumberSlot
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message} - invalid value!");
+                    Console.WriteLine($"{ex.Message} - invalid amount!");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
