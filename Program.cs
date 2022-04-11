@@ -8,6 +8,7 @@ namespace NumberSlot
         {
             int[,] slotGrid = new int[3, 3];
             int numberOfRows;
+            int playerMoneyPot;
             int winnings = 0;
             bool continueSpinning = true;
 
@@ -17,6 +18,7 @@ namespace NumberSlot
                 UIMethods.DisplayGrid(slotGrid);
                 try
                 {
+                    playerMoneyPot = UIMethods.PromptUserMoneyPot();
                     numberOfRows = UIMethods.PromptUserNumberEntry();
                     switch (numberOfRows)
                     {
@@ -38,11 +40,14 @@ namespace NumberSlot
                                 winnings += Grid.CalculateDiagonalLines(slotGrid, numberOfRows);
                                 break;
                     }
+
                     UIMethods.PrintWinnings(winnings);
+
                     winnings = 0; // reset winnings after each spin
+                    UIMethods.DisplayRemainingPot(playerMoneyPot, numberOfRows);
                     if (UIMethods.SpinAgainPrompt() == false)
                     {
-                        Environment.Exit(0);
+                        continueSpinning = false;
                     }
                 }
                 catch (Exception ex)

@@ -25,6 +25,23 @@ namespace NumberSlot
         }
 
         /// <summary>
+        /// Stores user input for money inserted into the slot machine
+        /// </summary>
+        /// <returns>An Integer larger than 0</returns>
+        public static int PromptUserMoneyPot()
+        {
+            Console.Write("How much money do you want to insert (in whole £)? ");
+            int playerCashPot = Convert.ToInt32(Console.ReadLine());
+            if (playerCashPot > 0) {
+                return playerCashPot;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Stores user input and converts to Integer. Anything outside of 1-8 will be caught by the try-catch statement.
         /// </summary>
         /// <returns>Integer, between 1-8</returns>
@@ -39,6 +56,19 @@ namespace NumberSlot
             else
             {
                 return 0;
+            }
+        }
+
+        public static void DisplayRemainingPot(int playerMoneyPot, int linesPlayed)
+        {
+            int remainingMoneyInPot = playerMoneyPot - linesPlayed;
+            if (remainingMoneyInPot > 0)
+            {
+                Console.WriteLine($"You have £{remainingMoneyInPot} to play with");
+            }
+            else
+            {
+                Console.WriteLine($"You have run out of money - no more lines can be played!");
             }
         }
 
