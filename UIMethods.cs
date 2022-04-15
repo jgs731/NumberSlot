@@ -59,23 +59,22 @@ namespace NumberSlot
             }
         }
 
-        public static void DisplayRemainingPot(int playerMoneyPot, int linesPlayed)
+        public static void DisplayRemainingPot(int remainingMoneyInPot)
         {
-            int remainingMoneyInPot = playerMoneyPot - linesPlayed;
-            if (remainingMoneyInPot > 0)
+            if (remainingMoneyInPot == 0)
             {
-                Console.WriteLine($"You have £{remainingMoneyInPot} to play with");
+                Console.WriteLine("You have run out of money - no more lines can be played!");
             }
             else
             {
-                Console.WriteLine($"You have run out of money - no more lines can be played!");
+                Console.WriteLine($"You have £{remainingMoneyInPot} to play with");
             }
         }
 
         /// <summary>
         /// Outputs the players winnings to the console.
         /// </summary>
-        /// <param name="winAmount"></param>
+        /// <param name="winAmount">player winning amount (in £)</param>
         public static void PrintWinnings(int winAmount)
         {
             // minimum win is £1 for a horizonal line
