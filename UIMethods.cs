@@ -61,7 +61,7 @@ namespace NumberSlot
 
         public static void DisplayRemainingPot(int remainingMoneyInPot)
         {
-            if (remainingMoneyInPot == 0)
+            if (remainingMoneyInPot <= 0)
             {
                 Console.WriteLine("You have run out of money - no more lines can be played!");
             }
